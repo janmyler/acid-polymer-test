@@ -6,7 +6,7 @@
   <template>
     <link rel="stylesheet" href="acid-carousel.css">
 
-    <core-pages selected="{{ selected }}" id="images">
+    <core-pages selected="{{ selected }}" id="images" on-mouseenter="{{ pauseAction }}" on-mouseout="{{ continueAction }}">
       <content select="img"></content>
     </core-pages>
 
