@@ -1,8 +1,24 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-pages/core-pages.html">
 
-<polymer-element name="yo-greeting" attributes="">
+<polymer-element name="acid-carousel" attributes="autoplay duration animation
+  height controls">
   <template>
     <link rel="stylesheet" href="acid-carousel.css">
+
+    <core-pages selected="0" id="images">
+      <content select="img"></content>
+    </core-pages>
+
+    <template if="{{controls === 'true'}}">
+      <div id="controls" >
+        <input type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{prevAction}}">
+        <input type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{nextAction}}">
+        <ul>
+
+        </ul>
+    </div>
   </template>
+
   <script src="acid-carousel.js"></script>
 </polymer-element>
