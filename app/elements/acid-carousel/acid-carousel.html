@@ -6,18 +6,24 @@
   <template>
     <link rel="stylesheet" href="acid-carousel.css">
 
-    <core-pages selected="0" id="images">
+    <core-pages selected="{{ selected }}" id="images">
       <content select="img"></content>
     </core-pages>
 
-    <template if="{{controls === 'true'}}">
-      <div id="controls" >
-        <input type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{prevAction}}">
-        <input type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{nextAction}}">
-        <ul>
+    <template if="{{ controls === 'true' && items.length > 1 }}">
+      <nav id="controls">
+        <input type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{ prevAction }}">
+        <input type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{ nextAction }}">
 
+        <ul>
+          <template repeat="{{ item in items }}">
+            <li>
+              <button aria-label="item-{{ item.index }}" alt="{{ item.index }}" on-tap="{{ seekAction }}" data-index="{{ item.index }}" class="{{ {active: item.index === selected} | tokenList }}"></button>
+            </li>
+          </template>
         </ul>
-    </div>
+      </nav>
+    </template>
   </template>
 
   <script src="acid-carousel.js"></script>
