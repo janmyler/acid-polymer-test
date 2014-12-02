@@ -2,7 +2,8 @@
   "name": "acid-polymer-test",
   "version": "0.0.0",
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.5.1"
+    "polymer": "Polymer/polymer#^0.5.1",
+    "core-pages": "Polymer/core-pages#~0.5.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.0.0"
