@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/core-pages/core-pages.html">
 
 <polymer-element name="acid-carousel" attributes="autoplay duration animation
-  height controls">
+  controls">
   <template>
     <link rel="stylesheet" href="acid-carousel.css">
 
@@ -11,14 +11,14 @@
     </core-pages>
 
     <template if="{{ controls === 'true' && items.length > 1 }}">
-      <nav id="controls">
-        <input type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{ prevAction }}">
-        <input type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{ nextAction }}">
+      <nav id="controls" class="navigation">
+        <input class="arrow arrow-left" type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{ prevAction }}">
+        <input class="arrow arrow-right" type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{ nextAction }}">
 
-        <ul>
+        <ul class="bullets">
           <template repeat="{{ item in items }}">
             <li>
-              <button aria-label="item-{{ item.index }}" alt="{{ item.index }}" on-tap="{{ seekAction }}" data-index="{{ item.index }}" class="{{ {active: item.index === selected} | tokenList }}"></button>
+              <button aria-label="item-{{ item.index }}" alt="{{ item.index }}" on-tap="{{ seekAction }}" data-index="{{ item.index }}" class="bullet {{ {active: item.index === selected} | tokenList }}"></button>
             </li>
           </template>
         </ul>

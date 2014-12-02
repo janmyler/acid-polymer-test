@@ -9,15 +9,11 @@
     autoplay: true,
     duration: 5000,
     animation: 'fade',
-    height: '500px',
     controls: 'true',
     animations: ['none', 'fade', 'slide'],
     items: [],
     selected: 0,
     ready: function() {
-      // set carousel's height
-      this.style.height = this.height;
-
       // get titles
       this.$.images.items.forEach(function(elem, ind) {
         this.items.push({
@@ -42,7 +38,7 @@
       this.selected -= 1;
     },
     seekAction: function(e, detail, target) {
-      console.log(e, detail, target);
+      this.selected = parseInt(target.getAttribute('data-index'), 10);
     }
   });
 
