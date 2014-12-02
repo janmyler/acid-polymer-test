@@ -71,3 +71,11 @@ $naviOffset: 4.6%;
     }
   }
 }
+
+.progress {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  background-color: rgba(255, 255, 255, .65);
+  box-shadow: 0 1px 5px rgba(80, 80, 80, .1);
+}

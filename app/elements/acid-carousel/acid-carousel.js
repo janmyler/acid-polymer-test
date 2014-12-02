@@ -6,14 +6,22 @@
   'use strict';
 
   Polymer({
+    // defaults
     autoplay: true,
     duration: 5000,
+    controls: true,
     animation: 'fade',
-    controls: 'true',
+
+    // internal values
     animations: ['none', 'fade', 'slide'],
     items: [],
     selected: 0,
-    playing: null,
+    interval: {
+      playing: null,
+      started: 0,
+      progress: 0,
+      paused: false
+    },
     ready: function() {
       // get titles
       this.$.images.items.forEach(function(elem, ind) {
@@ -28,56 +36,78 @@
         this.animation = 'fade';
       }
 
+      // check the boolean defs
+      if (typeof this.autoplay === 'string') {
+        this.autoplay = this.autoplay === 'true';
+      }
+      if (typeof this.controls === 'string') {
+        this.controls = this.controls === 'true';
+      }
+
       // start autoplay if needed
       if (this.autoplay) {
         this.play();
       }
     },
     nextAction: function() {
-      this.next();
-
-      // reset the timer
-      if (this.playing) {
-        this.play();
-      }
+      var step = (this.selected + 1) % this.items.length;
+      this.go(step);
     },
     prevAction: function() {
-      this.prev();
+      var step = this.selected;
 
-      // reset the timer
-      if (this.playing) {
-        this.play();
+      if (step === 0) {
+        step = this.items.length;
       }
+      step -= 1;
+      this.go(step);
     },
     seekAction: function(e, detail, target) {
-      this.selected = parseInt(target.getAttribute('data-index'), 10);
+      var step = parseInt(target.getAttribute('data-index'), 10);
+      this.go(step);
     },
     pauseAction: function() {
+      this.interval.paused = true;
       this.stop();
     },
     continueAction: function() {
+      this.interval.paused = false;
       this.play();
     },
-    next: function() {
-      this.selected = (this.selected + 1) % this.items.length;
-    },
-    prev: function() {
-      if (this.selected === 0) {
-        this.selected = this.items.length;
-      }
-      this.selected -= 1;
+    go: function(n) {
+      this.selected = n;
+      this.play();
     },
     play: function() {
-      if (this.playing) {
-        this.stop();
+      if (this.interval.paused) {
+        return;
       }
 
-      this.playing = window.setInterval(function() {
+      this.stop();
+      this.interval.playing = window.setInterval(function() {
+        this.initProgress();
         this.nextAction();
       }.bind(this), this.duration);
+      this.initProgress();
     },
     stop: function() {
-      window.clearInterval(this.playing);
+      window.clearInterval(this.interval.playing);
+      this.interval.playing = null;
+    },
+    initProgress: function() {
+      this.interval.started = Date.now();
+      this.onProgress();
+    },
+    onProgress: function() {
+      if (this.interval.playing) {
+        window.requestAnimationFrame(function() {
+          this.onProgress();
+        }.bind(this));
+
+        this.interval.progress = (Date.now() - this.interval.started) / this.duration * 100;
+      } else {
+        this.interval.progress = 0;
+      }
     }
   });
 

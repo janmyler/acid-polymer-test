@@ -6,25 +6,32 @@
   <template>
     <link rel="stylesheet" href="acid-carousel.css">
 
-    <core-pages selected="{{ selected }}" id="images" on-mouseenter="{{ pauseAction }}" on-mouseout="{{ continueAction }}">
-      <content select="img"></content>
-    </core-pages>
+    <div on-mouseenter="{{ pauseAction }}" on-mouseleave="{{ continueAction }}">
+      <core-pages selected="{{ selected }}" id="images">
+        <content select="img"></content>
+      </core-pages>
 
-    <template if="{{ controls === 'true' && items.length > 1 }}">
-      <nav id="controls" class="navigation">
-        <input class="arrow arrow-left" type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{ prevAction }}">
-        <input class="arrow arrow-right" type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{ nextAction }}">
+      <template if="{{ autoplay }}">
+        <div class="progress" style="width: {{ interval.progress }}%"></div>
+      </template>
 
-        <ul class="bullets">
-          <template repeat="{{ item in items }}">
-            <li>
-              <button aria-label="item-{{ item.index }}" alt="{{ item.index }}" on-tap="{{ seekAction }}" data-index="{{ item.index }}" class="bullet {{ {active: item.index === selected} | tokenList }}"></button>
-            </li>
-          </template>
-        </ul>
-      </nav>
-    </template>
+      <template if="{{ controls && items.length > 1 }}">
+        <nav id="controls" class="navigation">
+          <input class="arrow arrow-left" type="image" src="images/arrow_left_white.png" alt="Previous" aria-label="previous" class="carousel-button btn btn-prev" on-tap="{{ prevAction }}">
+          <input class="arrow arrow-right" type="image" src="images/arrow_right_white.png" alt="Next" aria-label="next" class="carousel-button btn btn-prev" on-tap="{{ nextAction }}">
+
+          <ul class="bullets">
+            <template repeat="{{ item in items }}">
+              <li>
+                <button aria-label="item-{{ item.index }}" alt="{{ item.index }}" on-tap="{{ seekAction }}" data-index="{{ item.index }}" class="bullet {{ {active: item.index === selected} | tokenList }}"></button>
+              </li>
+            </template>
+          </ul>
+        </nav>
+      </template>
+    </div>
   </template>
 
+  <script src="js/rafPolyfill.js"></script>
   <script src="acid-carousel.js"></script>
 </polymer-element>
