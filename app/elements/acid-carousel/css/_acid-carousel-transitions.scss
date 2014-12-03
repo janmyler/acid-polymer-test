@@ -2,3 +2,46 @@
 //
 // CSS transitions for the test Polymer carousel
 
+.fade {
+  ::content > img {
+    opacity: 0;
+    transition: all 1s cubic-bezier(.03,.56,.7,.98);
+
+    &.core-selected {
+      opacity: 1;
+    }
+  }
+}
+
+.zoom {
+  ::content > img {
+    transition: all 1s cubic-bezier(.03,.56,.7,.98);
+    opacity: 0;
+    transform: translate3d(0, 10%, 0) scale(1.2);
+
+    &.core-selected {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.core-selected ~ img {
+      opacity: .5;
+      transform: translate3d(0, 10%, 0) scale(1.2);
+    }
+  }
+}
+
+.slide {
+  ::content > img {
+    transition: all 1s cubic-bezier(.03,.56,.7,.98);
+    transform: translate3d(-100%, 0, 0);
+
+    &.core-selected {
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.core-selected ~ img {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+}

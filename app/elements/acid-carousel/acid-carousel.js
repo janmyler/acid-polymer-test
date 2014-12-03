@@ -13,7 +13,12 @@
     animation: 'fade',
 
     // internal values
-    animations: ['none', 'fade', 'slide'],
+    animations: [
+      'none',
+      'fade',
+      'zoom',
+      'slide'
+    ],
     items: [],
     selected: 0,
     interval: {
