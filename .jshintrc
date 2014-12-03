@@ -19,6 +19,7 @@
     "wrap": true,
     "unwrap": true,
     "Polymer": true,
-    "Platform": true
+    "Platform": true,
+    "Velocity": true
   }
 }
