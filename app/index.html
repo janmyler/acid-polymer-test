@@ -19,15 +19,37 @@
 </head>
 
 <body unresolved>
+  <section class="main">
+    <h1>AcID Carousel</h1>
 
-  <h1>AcID Carousel</h1>
-  <acid-carousel>
-    <img src="images/bridge.jpg" alt="">
-    <img src="images/field.jpg" alt="">
-    <img src="images/bird.jpg" alt="">
-    <img src="images/mountains.jpg" alt="">
-    <img src="images/valley.jpg" alt="">
-  </acid-carousel>
+    <pre>{autoplay: true, duration: 5000, controls: true, animation: 'slide'}</pre>
+    <acid-carousel animation="slide">
+      <img src="images/bridge.jpg" alt="">
+      <img src="images/field.jpg" alt="">
+      <img src="images/bird.jpg" alt="">
+      <img src="images/mountains.jpg" alt="">
+      <img src="images/valley.jpg" alt="">
+    </acid-carousel>
+
+    <pre>{autoplay: true, duration: 2000, controls: false, animation: 'zoom'}</pre>
+    <div style="max-width: 460px">
+      <acid-carousel animation="zoom" controls="false" duration="2000">
+        <img src="images/field.jpg" alt="">
+        <img src="images/bird.jpg" alt="">
+        <img src="images/mountains.jpg" alt="">
+        <img src="images/valley.jpg" alt="">
+      </acid-carousel>
+    </div>
+
+    <pre>{autoplay: false, controls: true, animation: 'fade'}</pre>
+    <div style="max-width: 320px">
+      <acid-carousel autoplay="false">
+        <img src="images/bridge.jpg" alt="">
+        <img src="images/field.jpg" alt="">
+        <img src="images/valley.jpg" alt="">
+      </acid-carousel>
+    </div>
+  </section>
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
