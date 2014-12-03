@@ -16,6 +16,12 @@
 core-pages {
   padding-bottom: 50%;
 
+  &.anim-fallback {
+    ::content > img {
+      visibility: visible;
+    }
+  }
+
   ::content > img {
     width: 100%;
     height: auto;
@@ -52,22 +58,22 @@ $naviOffset: 4.6%;
       display: inline-block;
       margin: 0 2px;
     }
+  }
 
-    .bullet {
-      width: 10px;
-      height: 10px;
-      padding: 0;
-      border: 1px solid #fff;
+  .bullet {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 1px solid #fff;
 
-      opacity: .8;
-      outline: 0;
-      background-color: rgba(255, 255, 255, .1);
-      border-radius: 100%;
-      cursor: pointer;
+    opacity: .8;
+    outline: 0;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 100%;
+    cursor: pointer;
 
-      &.active {
-        background: #fff;
-      }
+    &.active {
+      background: #fff;
     }
   }
 }

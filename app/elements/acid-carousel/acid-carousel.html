@@ -12,7 +12,7 @@
       </core-pages>
 
       <template if="{{ autoplay }}">
-        <div class="progress" style="width: {{ interval.progress }}%"></div>
+        <div id="progress" class="progress"></div>
       </template>
 
       <template if="{{ controls && items.length > 1 }}">
@@ -32,6 +32,9 @@
     </div>
   </template>
 
-  <script src="js/rafPolyfill.js"></script>
+  <!--[if lt IE 10]>
+    <script src="//cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
+    <script src="js/rafPolyfill.js"></script>
+  <![endif]-->
   <script src="acid-carousel.js"></script>
 </polymer-element>
